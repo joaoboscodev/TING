@@ -12,13 +12,12 @@ class Queue(AbstractQueue):
         self.queue.append(value)
 
     def dequeue(self):
-        if not self.is_empty():
-            return self.queue.pop(0)
+        if not self:
+            raise IndexError("Queue vazia")
         else:
-            raise IndexError("Queue is empty")
+            return self.queue.pop(0)
 
     def search(self, index):
-        if 0 <= index < len(self.queue):
-            return self.queue[index]
-        else:
-            raise IndexError("Invalid or nonexistent index")
+        if not (0 <= index < len(self.queue)):
+            raise IndexError("Índice Inválido ou Inexistente")
+        return self.queue[index]
